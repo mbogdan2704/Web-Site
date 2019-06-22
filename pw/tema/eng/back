@@ -1,0 +1,33 @@
+<?php
+require_once 'idiorm.php';
+ORM::configure('sqlite:/Applications/MAMP/htdocs/tema/database');
+
+ORM::get_db()->exec('DROP TABLE IF EXISTS users;');
+ORM::get_db()->exec(
+    'CREATE TABLE users (' .
+        'id INTEGER PRIMARY KEY AUTOINCREMENT, ' .
+        'name TEXT, ' .
+		'parola TEXT, )' 
+);
+ echo "AICI";
+function create_users($nume, $parola) {
+    $users = ORM::for_table('users')->create();
+    $users->nume = $nume;
+	$users->parola = $parola;
+    return $users;
+}
+ 
+$news_list = array(
+    create_users("bogdan", 
+	"bogdan123"),
+	
+	create_users("ionel",
+	"ionel123")
+);
+ 
+echo('ok<br>');
+echo('users ' . ORM::for_table('users')->count() . '<br>');
+
+function get_all_news() {
+	//TODO 
+}
